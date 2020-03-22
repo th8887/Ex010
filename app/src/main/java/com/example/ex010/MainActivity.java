@@ -18,9 +18,8 @@ public class MainActivity extends AppCompatActivity {
     TextView tv11,tv12,tv21,tv22,tv31,tv32;
     Button btn,btn1,btn2,btn3;
     ImageView iv1,iv2,iv3;
-    EditText ed1,ed2,ed3;
+    EditText et1,et2,et3;
     int n1,n2,w,sum,sum1,success;
-    String s1;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,79 +41,93 @@ public class MainActivity extends AppCompatActivity {
         iv2=(ImageView) findViewById(R.id.iv2);
         iv3=(ImageView) findViewById(R.id.iv3);
 
-        ed1=(EditText) findViewById(R.id.et1);
-        ed2=(EditText) findViewById(R.id.et2);
-        ed3=(EditText) findViewById(R.id.et3);
+        et1=(EditText) findViewById(R.id.et1);
+        et2=(EditText) findViewById(R.id.et2);
+        et3=(EditText) findViewById(R.id.et3);
 
+        start();
     }
 
-    public void start(View view) {
-        n1=rnd.nextInt(11)+88;
-        n2=rnd.nextInt(11)+88;
+    private void start() {
+        n1=rnd.nextInt(90)+10;
+        n2=rnd.nextInt(90)+10;
         tv11.setText("Number:  "+n1);
         tv12.setText("Number:  "+n2);
         tv21.setText("0");
         tv22.setText("0");
         tv31.setText("0");
         tv32.setText("0");
-        w=sum=sum1=success=0;
+        et1.getText().clear();
+        et2.getText().clear();
+        et3.getText().clear();
+        iv1.setImageDrawable(null);
+        iv2.setImageDrawable(null);
+        iv3.setImageDrawable(null);
+        w=sum1=success=0;
     }
+
     public void level1(View view) {
-        sum=n1+n2;
-        s1= ed1.getText().toString();
-        if (s1.equals(""))
-            Toast.makeText(this, "please enter a number", Toast.LENGTH_SHORT).show();
-        sum1=Integer.parseInt(s1);
-        if(sum==sum1) {
-            iv1.setImageResource(R.drawable.good);
-            tv21.setText(sum1);
-        }
+        sum= n1+n2;
+        String s1= et1.getText().toString();
+        if(s1.equals(""))
+            Toast.makeText(this,"please enter number",Toast.LENGTH_SHORT).show();
         else {
-            iv1.setImageResource(R.drawable.notgood);
-            w++;
-            tv21.setText(sum);
+            sum1 = Integer.parseInt(s1);
+            if (sum == sum1) {
+                iv1.setImageResource(R.drawable.mark1);
+            } else {
+                iv1.setImageResource(R.drawable.mark0);
+                w++;
+            }
+            tv21.setText("" + sum);
+            n2 = rnd.nextInt(90) + 10;
+            tv22.setText("" + n2);
         }
     }
 
-    public void level2(View view) {
-        n2=rnd.nextInt();
-        tv22.setText(n2);
+    public void level2(View view){
         sum=sum+n2;
-        s1= ed2.getText().toString();
-        if (s1.equals(""))
-            Toast.makeText(this, "please enter a number", Toast.LENGTH_SHORT).show();
-        sum1=Integer.parseInt(s1);
-        if(sum==sum1) {
-            iv2.setImageResource(R.drawable.good);
-            tv31.setText(sum1);
-        }
+        String s1=et2.getText().toString();
+        if(s1.equals(""))
+            Toast.makeText(this,"please enter number",Toast.LENGTH_SHORT).show();
         else {
-            iv2.setImageResource(R.drawable.notgood);
-            w++;
-            tv31.setText(sum);
+            sum1 = Integer.parseInt(s1);
+            if (sum == sum1)
+                iv2.setImageResource(R.drawable.mark1);
+
+            else {
+                iv2.setImageResource(R.drawable.mark0);
+                w++;
+            }
+            tv31.setText("" + sum);
+            n2 = rnd.nextInt(90) + 10;
+            tv32.setText("" + n2);
         }
     }
 
-    public void level3(View view) {
-        n2=rnd.nextInt();
-        tv32.setText(n2);
+
+    public void level3(View view){
         sum=sum+n2;
-        s1= ed3.getText().toString();
-        if (s1.equals(""))
-            Toast.makeText(this, "please enter a number", Toast.LENGTH_SHORT).show();
-        sum1=Integer.parseInt(s1);
-        if(sum==sum1) {
-            iv1.setImageResource(R.drawable.good);
-        }
+        String s1=et3.getText().toString();
+        if(s1.equals(""))
+            Toast.makeText(this,"please enter number",Toast.LENGTH_SHORT).show();
         else {
-            iv1.setImageResource(R.drawable.notgood);
-            w++;
+            sum1 = Integer.parseInt(s1);
+            if (sum == sum1) {
+                iv3.setImageResource(R.drawable.mark1);
+            } else {
+                iv3.setImageResource(R.drawable.mark0);
+                w++;
+            }
+            success = ((3 - w) * 100) / 3;
+            if (success == 0)
+                Toast.makeText(this, "Success:100%  3/3", Toast.LENGTH_SHORT).show();
+            else
+                Toast.makeText(this, "Success:" + success + "%    " + "3/" + (3 - w), Toast.LENGTH_SHORT).show();
         }
-        success=((3-w)*100)/3;
-        if(success==0)
-            Toast.makeText(this, "Success:100%  3/3", Toast.LENGTH_SHORT).show();
-        else
-            Toast.makeText(this, "Success:"+success+"%"+"3/"+(3-w), Toast.LENGTH_SHORT).show();
     }
 
+    public void start(View view) {
+        start();
+    }
 }

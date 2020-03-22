@@ -186,7 +186,7 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="0px"
-            android:layout_weight="10"
+            android:layout_weight="20"
             android:orientation="horizontal">
 
             <ImageView
@@ -245,9 +245,9 @@
         </LinearLayout>
 
         <Space
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="60" />
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="50" />
 
     </LinearLayout>
 
